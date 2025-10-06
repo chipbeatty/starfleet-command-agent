@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 import os
 
 from src.tools.search_tool import search_stellar_cartography
+from src.tools.calculator_tool import engineering_calculations
 from src.prompts.system_prompt import STARFLEET_SYSTEM_PROMPT
 
 load_dotenv()
@@ -20,7 +21,9 @@ def create_starfleet_agent():
     )
 
     # Tools available to the agent
-    tools = [search_stellar_cartography]
+    tools = [search_stellar_cartography,
+             engineering_calculations,
+             ]
 
     agent = create_react_agent(
         model=llm,
