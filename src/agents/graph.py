@@ -6,6 +6,7 @@ import os
 
 from src.tools.search_tool import search_stellar_cartography
 from src.tools.calculator_tool import engineering_calculations
+from src.tools.mission_logs_tool import (create_mission_log, list_mission_logs, read_mission_log)
 from src.prompts.system_prompt import STARFLEET_SYSTEM_PROMPT
 
 load_dotenv()
@@ -21,9 +22,13 @@ def create_starfleet_agent():
     )
 
     # Tools available to the agent
-    tools = [search_stellar_cartography,
-             engineering_calculations,
-             ]
+    tools = [
+    search_stellar_cartography,
+    engineering_calculations,
+    create_mission_log,      
+    list_mission_logs,
+    read_mission_log,
+]
 
     agent = create_react_agent(
         model=llm,
