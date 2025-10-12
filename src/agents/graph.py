@@ -1,4 +1,5 @@
 from langgraph.prebuilt import create_react_agent
+from langgraph.checkpoint.memory import MemorySaver
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import SystemMessage
 from dotenv import load_dotenv
@@ -29,11 +30,15 @@ def create_starfleet_agent():
     list_mission_logs,
     read_mission_log,
 ]
+    
+    # Create memory/checkpointer
+    memory = MemorySaver()
 
     agent = create_react_agent(
         model=llm,
         tools=tools,
-        prompt=SystemMessage(content=STARFLEET_SYSTEM_PROMPT)
+        prompt=SystemMessage(content=STARFLEET_SYSTEM_PROMPT),
+        checkpointer=memory
     )
 
     return agent
